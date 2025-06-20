@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Restoran</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f9f9f9;
+  }
+  .navbar {
+    background-color: #0B0C2A;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navbar .logo {
+    display: flex;
+    align-items: center;
+    color: orange;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .navbar .logo i {
+    font-size: 26px;
+    margin-right: 8px;
+  }
+  .menu-icon {
+    font-size: 26px;
+    color: #fff;
+    cursor: pointer;
+  }
+  .breadcrumb {
+    background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .breadcrumb h1 {
+    font-size: 32px;
+    margin: 0;
+  }
+  .breadcrumb p {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  .breadcrumb span {
+    color: orange;
+    font-weight: 600;
+  }
+  .menu {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .item {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    text-align: center;
+  }
+  .item img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .item h4 {
+    margin: 10px 0 5px;
+  }
+  .item p {
+    font-size: 14px;
+    color: #666;
+  }
+  .item span {
+    display: block;
+    margin: 8px 0;
+    color: orange;
+    font-weight: bold;
+  }
+  .item button {
+    padding: 6px 12px;
+    background: orange;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  #cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: orange;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 50px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 999;
+  }
+  #cartDetails {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: #fff;
+    color: #333;
+    padding: 15px;
+    width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+  }
+  #cartDetails h4 { margin: 0 0 10px; }
+  #cartDetails ul { list-style: none; padding: 0; margin: 0; max-height: 150px; overflow-y: auto;}
+  #cartDetails li { margin-bottom: 5px; font-size: 14px; }
+  #cartDetails strong { display: block; margin-top: 10px; }
+  #checkoutBtn {
+    margin-top: 10px;
+    display: block;
+    background: green;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="navbar">
+  <a href="#" class="logo"><i>🍴</i> Restoran</a>
+  <div class="menu-icon">&#9776;</div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <h1>Food Menu</h1>
+  <p><span>HOME</span> / PAGES / MENU</p>
+</div>
+
+<!-- MENU LIST -->
+<div class="menu">
+  <div class="item">
+    <img src="https://via.placeholder.com/200" alt="Burger">
+    <h4>Chicken Burger</h4>
+    <p>Delicious grilled burger.</p>
+    <span>$5</span>
+    <button onclick="addToCart('Chicken Burger', 5)">Tambah</button>
+  </div>
+  <div class="item">
+    <img src="https://via.placeholder.com/200" alt="Pizza">
+    <h4>Pepperoni Pizza</h4>
+    <p>Hot and cheesy pizza.</p>
+    <span>$8</span>
+    <button onclick="addToCart('Pepperoni Pizza', 8)">Tambah</button>
+  </div>
+  <div class="item">
+    <img src="https://via.placeholder.com/200" alt="Noodle">
+    <h4>Fried Noodle</h4>
+    <p>Stir-fried noodle.</p>
+    <span>$4</span>
+    <button onclick="addToCart('Fried Noodle', 4)">Tambah</button>
+  </div>
+</div>
+
+<!-- FLOATING CART -->
+<div id="cart" onclick="toggleCart()">🛒 Keranjang (<span id="cartCount">0</span>)</div>
+<div id="cartDetails">
+  <h4>Keranjang</h4>
+  <ul id="cartItems"></ul>
+  <strong>Total: $<span id="cartTotal">0</span></strong>
+  <a id="checkoutBtn" target="_blank">Checkout via WA</a>
+</div>
+
+<script>
+  let cart = [];
+
+  function addToCart(name, price) {
+    cart.push({name, price});
+    updateCart();
+  }
+
+  function updateCart() {
+    document.getElementById('cartCount').innerText = cart.length;
+    let items = '';
+    let total = 0;
+    cart.forEach(item => {
+      items += `<li>${item.name} - $${item.price}</li>`;
+      total += item.price;
+    });
+    document.getElementById('cartItems').innerHTML = items;
+    document.getElementById('cartTotal').innerText = total;
+
+    // WhatsApp link
+    let message = "Halo, saya mau pesan:%0A";
+    cart.forEach(item => {
+      message += `- ${item.name} ($${item.price})%0A`;
+    });
+    message += `Total: $${total}`;
+    document.getElementById('checkoutBtn').href = `https://wa.me/6281234567890?text=${message}`;
+  }
+
+  function toggleCart() {
+    const cartBox = document.getElementById('cartDetails');
+    cartBox.style.display = (cartBox.style.display === 'none' || cartBox.style.display === '') ? 'block' : 'none';
+  }
+</script>
+
+</body>
+</html>

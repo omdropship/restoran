@@ -47,7 +47,68 @@
     }
   </style>
 </head>
-<body>
+<body> 
+
+
+
+<style>
+    .cak-body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+        background: #fff;
+    }
+
+    .cak-subtitle {
+        font-family: cursive; 
+        font-size: 24px;
+        font-weight: bold;
+        color: orange;
+        position: relative;
+        display: inline-block;
+        text-shadow: 
+            1px 0 orange,
+           -1px 0 orange,
+            0 1px orange,
+            0 -1px orange; /* Tebal 2x via shadow */
+    }
+
+    .cak-subtitle::before,
+    .cak-subtitle::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 40px;
+        height: 3px;
+        background-color: orange;
+    }
+
+    .cak-subtitle::before {
+        left: -50px;
+    }
+
+    .cak-subtitle::after {
+        right: -50px;
+    }
+
+    .cak-title {
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        font-size: 32px;
+        color: #222;
+        margin-top: 10px;
+        display: block;
+    }
+</style>
+</head>
+<body class="cak-body">
+
+<div class="cak-subtitle">Food Menu</div>
+<div class="cak-title">Most Popular Items</div>
+
+</body>
+
+  
 
 <h2>Most Popular Items</h2>
 <div class="category">

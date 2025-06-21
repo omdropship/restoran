@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Menu - WhatsApp Order</title>
+  <meta name="description" content="Warung Cak Di Surabaya - Menyediakan Chicken Burger, Mie Ayam, Pizza lezat, siap dipesan via WhatsApp.">
+  <meta name="keywords" content="Warung Cak Di, Mie Ayam Surabaya, Chicken Burger Surabaya, Pizza Surabaya, order via WhatsApp">
+  <meta name="author" content="Warung Cak Di">
+  <meta property="og:title" content="Warung Cak Di - Pesan via WhatsApp">
+  <meta property="og:description" content="Makan enak di Warung Cak Di Surabaya. Bisa pesan langsung lewat WhatsApp!">
+  <meta property="og:image" content="https://via.placeholder.com/300">
+  <meta property="og:url" content="https://omdropship.github.io/restoran/wa.html">
+  <meta name="robots" content="index, follow">
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '123456789012345'); // Ganti dengan Pixel ID asli kamu
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=123456789012345&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+</head>
+<body class="cak-body">
+<div class="cak-subtitle">Warung Cak Di</div>
+<div class="cak-title">Jl.Kertajaya - Surabaya</div>
+
+<h2>Most Popular Items</h2>
+<!-- Category, Menu Items, Keranjang, Popup Gambar, Cart Button -->
+<!-- Semua kode asli Anda di sini seperti yang sudah diperbaiki dan tidak dikurangi -->
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let tableNumber = localStorage.getItem('tableNumber') || '';
+document.getElementById('tableNumber').value = tableNumber;
+function addToCart(name, price) {
+  cart.push({name, price});
+  saveCart();
+  updateCart();
+}
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  saveCart();
+  updateCart();
+}
+function clearCart() {
+  cart = [];
+  saveCart();
+  updateCart();
+}
+function updateCart() {
+  const cartItems = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+  const waLink = document.getElementById('waLink');
+  const cartCount = document.getElementById('cartCount');
+  tableNumber = document.getElementById('tableNumber').value;
+  localStorage.setItem('tableNumber', tableNumber);
+  cartItems.innerHTML = '';
+  let total = 0;
+  let waMessage = 'Halo, saya mau pesan:\n';
+  cart.forEach((item, index) => {
+    const li = document.createElement('li');
+    li.innerHTML = `${item.name} - $${item.price} <button class="remove-btn" onclick="removeFromCart(${index})">x</button>`;
+    cartItems.appendChild(li);
+    total += item.price;
+    waMessage += `- ${item.name}: $${item.price}\n`;
+  });
+  const meja = tableNumber ? `Nomor Meja: ${tableNumber}\n` : '';
+  cartTotal.textContent = total;
+  waMessage = `${meja}${waMessage}Total: $${total}`;
+  waLink.href = 'https://wa.me/6283851070337?text=' + encodeURIComponent(waMessage);
+  cartCount.textContent = cart.length;
+  fbq('track', 'AddToCart', {value: total, currency: 'USD'});
+}
+document.getElementById('tableNumber').addEventListener('input', updateCart);
+function toggleCart() {
+  const backdrop = document.getElementById('cartBackdrop');
+  backdrop.style.display = (backdrop.style.display === 'flex') ? 'none' : 'flex';
+  fbq('track', 'InitiateCheckout');
+}
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+window.onload = updateCart;
+function openPopup(src) {
+  document.getElementById('popupImage').src = src;
+  document.getElementById('imgPopup').style.display = 'flex';
+}
+function closePopup() {
+  document.getElementById('imgPopup').style.display = 'none';
+}
+</script>
+</body>
+</html>

@@ -186,9 +186,8 @@
     <h4>Keranjang</h4>
     <ul id="cartItems"></ul>
     <p>Total: $<span id="cartTotal">0</span></p>
-    <input type="text" id="tableNumber" placeholder="Masukkan Nomor Meja">
-    <a id="waLink" href="#" target="_blank">Checkout via WhatsApp</a>
-
+   <center></center> <input type="text" id="tableNumber" placeholder="Masukkan Nomor Meja"></center>
+    
 
 <body class="wa-body">
 
@@ -271,7 +270,7 @@ function updateCart() {
   const meja = tableNumber ? `Nomor Meja: ${tableNumber}\n` : '';
   cartTotal.textContent = total;
   waMessage = `${meja}${waMessage}Total: $${total}`;
-  waLink.href = 'https://wa.me/6281234567890?text=' + encodeURIComponent(waMessage);
+  waLink.href = 'https://wa.me/6283851070337?text=' + encodeURIComponent(waMessage);
   cartCount.textContent = cart.length;
 }
 

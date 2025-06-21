@@ -174,7 +174,7 @@
   <button onclick="addToCart('Mie Ayam', 90)">+</button>
 </div>
 <div class="menu-item">
-  <img src="https://via.placeholder.com/70" alt="">
+<img src="https://img.tempo.co/indonesiana/images/all/2017/04/18/mie-ayam-putra-22.jpg" alt="" onclick="openPopup(this.src)">
   <div class="menu-info"><h4>Pizza</h4><p>Lorem ipsum dolor</p></div>
   <div class="menu-price">$150</div>
   <button onclick="addToCart('Pizza', 150)">+</button>
@@ -224,6 +224,15 @@
   <span class="cart-count" id="cartCount">0</span>
 </button>
 
+
+<!-- Lightbox Popup Gambar -->
+<div id="imgPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+    background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">
+  <span onclick="closePopup()" style="position:absolute; top:20px; right:30px; color:#fff; font-size:30px; 
+    cursor:pointer;">&times;</span>
+  <img id="popupImage" src="" style="max-width:90%; max-height:90%; border-radius:10px;">
+</div>
+  
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 <style>
   .cak-social-wrapper {
@@ -334,6 +343,14 @@ function saveCart() {
 
 window.onload = updateCart;
 </script>
+<scrip>function openPopup(src) {
+  document.getElementById('popupImage').src = src;
+  document.getElementById('imgPopup').style.display = 'flex';
+}
 
+function closePopup() {
+  document.getElementById('imgPopup').style.display = 'none';
+}
+</scrip>
 </body>
 </html>

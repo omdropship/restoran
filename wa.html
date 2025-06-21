@@ -224,6 +224,57 @@
   <span class="cart-count" id="cartCount">0</span>
 </button>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+  .cak-social-wrapper {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .cak-social-wrapper h3 {
+    font-family: sans-serif;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  .cak-social {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  .cak-social a {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    background: #FFA500;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+  }
+  .cak-social a:hover {
+    transform: scale(1.15);
+  }
+</style>
+
+
+<div class="cak-social-wrapper">
+  <h3>Temukan Kami Di</h3>
+  <div class="cak-social">
+    <a href="#" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+    <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+    <a href="#" title="Twitter / X"><i class="bi bi-twitter-x"></i></a>
+    <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+    <a href="#" title="YouTube"><i class="bi bi-youtube"></i></a>
+  </div>
+</div>
+
+
+
+  
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let tableNumber = localStorage.getItem('tableNumber') || '';

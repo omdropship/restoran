@@ -135,6 +135,67 @@
   <div class="menu-price">$150</div>
   <button onclick="addToCart('Pizza', 150)">+</button>
 </div>
+
+tes
+
+<!-- KATEGORI -->
+<div class="category">
+  <div data-category="breakfast" class="cat-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png">
+    <p><strong>Popular</strong><br>Breakfast</p>
+  </div>
+  <div data-category="lunch" class="cat-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png">
+    <p><strong>Special</strong><br>Lunch</p>
+  </div>
+  <div data-category="dinner" class="cat-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
+    <p><strong>Lovely</strong><br>Dinner</p>
+  </div>
+</div>
+
+<!-- MENU ITEMS -->
+<div class="menu-item" data-category="lunch">
+  <img src="https://d2vuyvo9qdtgo9.cloudfront.net/foods/October2023/q37X03Mb7vOsvq7O7OcM.webp" alt="" onclick="openPopup(this.src)">
+  <div class="menu-info"><h4>Chicken Burger</h4><p>Lorem ipsum dolor</p></div>
+  <div class="menu-price">$115</div>
+  <button onclick="addToCart('Chicken Burger', 115)">+</button>
+</div>
+
+<div class="menu-item" data-category="lunch">
+  <img src="https://img.tempo.co/indonesiana/images/all/2017/04/18/mie-ayam-putra-22.jpg" alt="" onclick="openPopup(this.src)">
+  <div class="menu-info"><h4>Mie Ayam</h4><p>Lorem ipsum dolor</p></div>
+  <div class="menu-price">$90</div>
+  <button onclick="addToCart('Mie Ayam', 90)">+</button>
+</div>
+
+<div class="menu-item" data-category="dinner">
+  <img src="https://via.placeholder.com/70" alt="" onclick="openPopup(this.src)">
+  <div class="menu-info"><h4>Pizza</h4><p>Lorem ipsum dolor</p></div>
+  <div class="menu-price">$150</div>
+  <button onclick="addToCart('Pizza', 150)">+</button>
+</div>
+
+<!-- JS Langsung Jadi Satu -->
+<script>
+  const catButtons = document.querySelectorAll('.cat-btn');
+  const menuItems = document.querySelectorAll('.menu-item');
+
+  // Tampilkan semua menu saat awal load
+  menuItems.forEach(item => item.style.display = 'block');
+
+  catButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.dataset.category;
+      menuItems.forEach(item => {
+        item.style.display = item.dataset.category === selected ? 'block' : 'none';
+      });
+    });
+  });
+</script>
+tes
+
+  
 <div class="cart-summary-backdrop" id="cartBackdrop" onclick="toggleCart()">
   <div class="cart-summary" onclick="event.stopPropagation()">
     <h4>Keranjang</h4>
